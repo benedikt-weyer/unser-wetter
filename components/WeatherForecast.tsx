@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { WeatherForecast as WeatherForecastType, getWeatherDescription } from '../services/weatherService';
 import { Card } from './ui/card';
 import { Spinner } from './ui/spinner';
@@ -90,10 +90,13 @@ export const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast, load
     <View className="w-full">
       <Text className="text-2xl font-bold mb-4 text-center text-white">{forecast.stationName}</Text>
       
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
-        {forecast.forecast.map((day, index) => (
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={forecast.forecast}
+        keyExtractor={(item, index) => `${item.dayDate}-${index}`}
+        renderItem={({ item: day }) => (
           <Card
-            key={index}
             className="p-4 mr-3 items-center min-w-[140px]"
             variant="elevated"
           >
@@ -123,8 +126,8 @@ export const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast, load
               </Text>
             )}
           </Card>
-        ))}
-      </ScrollView>
+        )}
+      />
     </View>
   );
 };

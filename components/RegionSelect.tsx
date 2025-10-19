@@ -72,7 +72,7 @@ export const RegionSelect: React.FC<RegionSelectProps> = ({ selectedCity, onSele
 
             <FlatList
               data={filteredCities}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => `${item.id}-${item.name}`}
               renderItem={({ item }) => (
                 <Pressable onPress={() => handleSelectCity(item)}>
                   <Card className="p-4 mb-2">
