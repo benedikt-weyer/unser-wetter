@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { WeatherForecast as WeatherForecastType, getWeatherDescription } from '../services/weatherService';
+import { HourlyForecast } from './HourlyForecast';
 import { Card } from './ui/card';
 import { Spinner } from './ui/spinner';
 import { Text } from './ui/text';
@@ -128,6 +129,8 @@ export const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast, load
           </Card>
         )}
       />
+      
+      <HourlyForecast hourlyData={forecast.hourlyForecast} />
     </View>
   );
 };

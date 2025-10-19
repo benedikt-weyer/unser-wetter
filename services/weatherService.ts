@@ -5,6 +5,7 @@ export interface WeatherForecast {
   stationId: string;
   stationName: string;
   forecast: ForecastDay[];
+  hourlyForecast: HourlyForecast[];
 }
 
 export interface ForecastDay {
@@ -16,6 +17,14 @@ export interface ForecastDay {
   precipitation?: number;
   windSpeed?: number;
   humidity?: number;
+}
+
+export interface HourlyForecast {
+  time: Date;
+  temperature: number;
+  precipitation: number;
+  windSpeed: number;
+  icon: number;
 }
 
 export const getWeatherDescription = (iconId: number): string => {
@@ -92,10 +101,37 @@ export const fetchWeatherForecast = async (stationId: string): Promise<WeatherFo
     
     console.log('📊 Parsed forecast:', forecast);
     
+    // Parse hourly forecast data
+    const hourlyForecast: HourlyForecast[] = [];
+    
+    if (data.forecast) {
+      const startTime = data.forecast.start;
+      const temperatures = data.forecast.temperature || [];
+      const precipitation = data.forecast.precipitationTotal || [];
+      const windSpeeds = data.forecast.windSpeed || [];
+      const icons = data.forecast.icon || [];
+      
+      // Take next 24 hours
+      const hoursToShow = Math.min(24, temperatures.length);
+      
+      for (let i = 0; i < hoursToShow; i++) {
+        hourlyForecast.push({
+          time: new Date(startTime + i * 3600000), // Add hours in milliseconds
+          temperature: temperatures[i] !== undefined ? temperatures[i] / 10 : 0,
+          precipitation: precipitation[i] !== undefined ? precipitation[i] / 10 : 0,
+          windSpeed: windSpeeds[i] !== undefined ? (windSpeeds[i] / 10) * 3.6 : 0,
+          icon: icons[i] || 1,
+        });
+      }
+    }
+    
+    console.log('📊 Parsed hourly forecast:', hourlyForecast);
+    
     return {
       stationId,
       stationName: data.stationName || 'Unbekannt',
       forecast,
+      hourlyForecast,
     };
   } catch (error) {
     console.error('Error fetching weather forecast:', error);
