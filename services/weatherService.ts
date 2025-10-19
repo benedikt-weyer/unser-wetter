@@ -78,16 +78,19 @@ export const fetchWeatherForecast = async (stationId: string): Promise<WeatherFo
       data.days.forEach((day: any) => {
         forecast.push({
           dayDate: day.dayDate,
-          icon: day.icon || 1,
-          temperature: day.temperatureMax || day.temperature || 0,
-          temperatureMin: day.temperatureMin,
-          temperatureMax: day.temperatureMax,
-          precipitation: day.precipitation,
-          windSpeed: day.windSpeed,
+          icon: day.icon1 || day.icon || 1,
+          temperature: day.temperatureMax ? day.temperatureMax / 10 : 0,
+          temperatureMin: day.temperatureMin !== undefined ? day.temperatureMin / 10 : undefined,
+          temperatureMax: day.temperatureMax !== undefined ? day.temperatureMax / 10 : undefined,
+          precipitation: day.precipitation !== undefined ? day.precipitation / 10 : undefined,
+          // Wind speed is in tenths of m/s, convert to km/h: (value / 10) * 3.6
+          windSpeed: day.windSpeed !== undefined ? (day.windSpeed / 10) * 3.6 : undefined,
           humidity: day.humidity,
         });
       });
     }
+    
+    console.log('📊 Parsed forecast:', forecast);
     
     return {
       stationId,

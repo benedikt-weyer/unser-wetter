@@ -105,11 +105,11 @@ export const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast, load
             </Text>
             <Text className="text-4xl mb-2">{getWeatherEmoji(day.icon)}</Text>
             <Text className="text-2xl font-bold text-gray-800 mb-1">
-              {day.temperatureMax !== undefined ? `${Math.round(day.temperatureMax)}°` : `${Math.round(day.temperature)}°`}
+              {day.temperatureMax !== undefined ? `${Math.round(day.temperatureMax)}°C` : `${Math.round(day.temperature)}°C`}
             </Text>
             {day.temperatureMin !== undefined && (
               <Text className="text-sm text-gray-600 mb-2">
-                Min: {Math.round(day.temperatureMin)}°
+                Min: {Math.round(day.temperatureMin)}°C
               </Text>
             )}
             <Text className="text-xs text-gray-600 text-center">
