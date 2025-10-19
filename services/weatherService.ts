@@ -57,7 +57,13 @@ export const getWeatherDescription = (iconId: number): string => {
 
 export const fetchWeatherForecast = async (stationId: string): Promise<WeatherForecast | null> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/forecast_mosmix_${stationId}.json`);
+    const url = `${API_BASE_URL}/forecast_mosmix_${stationId}.json`;
+    console.log('🌤️ Fetching weather from:', url);
+    console.log('📍 Station ID:', stationId);
+    
+    const response = await fetch(url);
+    
+    console.log('📡 Response status:', response.status);
     
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status}`);
