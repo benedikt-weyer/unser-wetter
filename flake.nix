@@ -39,12 +39,9 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             nodejs_22
-            nodePackages.pnpm
             androidSdk
             jdk17
             watchman
-
-            eas-cli
           ];
 
           shellHook = ''
