@@ -27,7 +27,7 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 export const findNearestStation = (
   cityLat: number,
   cityLon: number,
-  stations: Array<{ id: string; latitude: number; longitude: number; name: string }>
+  stations: { id: string; latitude: number; longitude: number; name: string }[]
 ): { stationId: string; distance: number; stationName: string } | null => {
   if (!stations || stations.length === 0) {
     return null;
