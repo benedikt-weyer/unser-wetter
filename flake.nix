@@ -43,6 +43,8 @@
             androidSdk
             jdk17
             watchman
+
+            eas-cli
           ];
 
           shellHook = ''

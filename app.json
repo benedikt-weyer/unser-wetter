@@ -3,28 +3,24 @@
     "name": "Unser Wetter",
     "slug": "unser-wetter",
     "version": "1.0.0",
-
     "web": {
       "favicon": "./assets/unser_wetter_logo_v1.png"
     },
-
     "experiments": {
       "tsconfigPaths": true
     },
-
     "plugins": [],
-
     "orientation": "portrait",
     "icon": "./assets/unser_wetter_logo_v1.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/unser_wetter_logo_v1.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -33,6 +29,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/unser_wetter_logo_v1.png",
         "backgroundColor": "#ffffff"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f84c30f5-5543-4c50-b5ed-bd51174a824c"
       }
     }
   }
